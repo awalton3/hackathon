@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { Router } from '@angular/router';
+import { DatabaseService } from '../database.service';
 
 @Injectable({ providedIn: 'root' })
 
 export class AuthService {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private fbService: DatabaseService) { }
 
   register(email, password, username) {
     console.log(username, email, password)
@@ -18,6 +19,7 @@ export class AuthService {
       .then(userObj => { //.then waits for response
         this.router.navigate(['/login'])
         //this.userService.addUserToFbCollect(this.createNewUserObj(userObj,formData))
+        this.fbService.createUser(userObj.user.uid, username)
       })
       .catch(error => { // to account for errors in request/promise
         console.log(error)
@@ -30,11 +32,12 @@ export class AuthService {
       firebase.auth().signInWithEmailAndPassword(email, password)
         .then(userObj => {
           console.log(userObj)
-          sessionStorage.setItem('email', email)
+          sessionStorage.setItem('userID', userObj.user.uid)
           this.router.navigate(['/home'])
         }).catch(error => this.handleError(error.code))
     }
 
+    //function to handle error codes
     handleError(errorCode: any) {
 
       switch (errorCode) {
