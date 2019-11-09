@@ -1,0 +1,110 @@
+.logo--width {
+  width: 260px;
+}
+
+.auth-input{
+  background-color: #244359;
+  border-radius: 33.5px;
+  font-size: 14px;
+  width: 320px;
+  height: 38px;
+  margin-bottom: 13px;
+  padding: 0 25px;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.auth-input-field {
+  color: #eee;
+  margin-top: -4px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  caret-color: #98aab6 !important;
+}
+
+.auth-input-field-icon {
+  color: #98aab6;
+  font-size: 17px;
+  padding-right: 12px;
+}
+
+
+.auth-radio-label {
+  margin-top: 5px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #eee;
+}
+
+.auth-radio-group {
+  width: 100%;
+  margin: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  color: #eee;
+}
+
+.auth-radio-buttons {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  padding: 5px;
+}
+
+.auth-input-password-hint {
+  font-size: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  margin-top: 5px;
+  color: #98aab6;
+}
+
+.auth-switch-prompt {
+  color: white;
+  font-size: 13px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 320px) {
+  .auth-input {
+    width: 250px;
+  }
+  .auth-radio-group {
+    width: 250px;
+  }
+}
+
+:host ::ng-deep .mat-form-field-underline,  ::ng-deep .mat-form-field-ripple{
+  display: none !important;
+}
+
+:host ::ng-deep .mat-form-field-label{
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 400 !important;
+  color: #98aab6 !important;
+  top: 12px !important;
+}
+
+:host ::ng-deep .mat-focused .mat-form-field-label {
+  display: none !important;
+}
+
+:host ::ng-deep .mat-radio-outer-circle {
+  border-color: #ea9103 !important;
+}
+
+/* fix chrome autofill styling */
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #244359 inset !important;
+    -webkit-text-fill-color: #eee;
+}
+
+.dynamic-height {
+  height: 100vh;
+}
+
+@media (max-height: 450px) {
+  .dynamic-height {
+    height: inherit;
+  }
+}

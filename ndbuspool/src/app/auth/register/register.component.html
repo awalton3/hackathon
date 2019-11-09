@@ -1,1 +1,36 @@
 <p>register works!</p>
+<div fxLayout="column" fxLayoutAlign="center center" class="fade-in background-base dynamic-height">
+  <img class="logo--width" src="assets/img/mughub_logo_horizontal_onDark.png">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center center">
+
+    <mat-form-field floatLabel="never" class="auth-input" fxLayoutAlign="start start">
+      <input matInput formControlName="username" type="text" placeholder="Name" class="auth-input-field" fxLayoutAlign="center center">
+      <span matPrefix><i class="material-icons auth-input-field-icon" fxLayoutAlign="center center">person</i></span>
+    </mat-form-field>
+
+    <mat-form-field floatLabel="never" class="auth-input" fxLayoutAlign="start start">
+      <input matInput formControlName="email" type="email" placeholder="Email" class="auth-input-field" fxLayoutAlign="center center">
+      <span matPrefix><i class="material-icons auth-input-field-icon" fxLayoutAlign="center center">email</i></span>
+    </mat-form-field>
+
+    <mat-form-field floatLabel="never" class="auth-input" fxLayoutAlign="start start">
+      <mat-hint align="start" class="auth-input-password-hint">*Must be a min of 6 characters</mat-hint>
+      <input matInput formControlName="password" type="password" placeholder="Password" class="auth-input-field" fxLayoutAlign="center center" #input>
+      <span matPrefix><i class="material-icons auth-input-field-icon" fxLayoutAlign="center center">lock</i></span>
+    </mat-form-field>
+
+    <!-- <br>
+
+    <mat-radio-group formControlName="type" aria-label="Select an option" fxLayout="row" fxLayoutAlign="space-around center" class="auth-radio-group">
+      <label class="auth-radio-label">REGISTER AS A:</label>
+      <mat-radio-button value="student" class="auth-radio-buttons">Student</mat-radio-button>
+      <mat-radio-button value="tutor" class="auth-radio-buttons">Tutor</mat-radio-button>
+    </mat-radio-group>
+
+    <br> -->
+
+    <button mat-raised-button color="accent" type="submit" class="action-button" [disabled]="registerForm.invalid" style="color: #244359">REGISTER AS A {{ registerForm.value.type | uppercase }}</button>
+    <p class="auth-switch-prompt" routerLink="">Already have an account, login here.</p>
+
+  </form>
+</div>
