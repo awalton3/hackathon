@@ -10,6 +10,15 @@ import { RegisterComponent } from './auth/register/register.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialComponentsModule } from './shared/material-components.module';
 
+//Firebase
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from 'src/environments/environment';
+import * as firebase from 'firebase';
+
+firebase.initializeApp(environment.firebaseConfig);
 
 @NgModule({
   declarations: [
@@ -22,7 +31,12 @@ import { MaterialComponentsModule } from './shared/material-components.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsMaterialComponentsModule,
-    MaterialComponentsModule
+    MaterialComponentsModule,
+
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireAuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

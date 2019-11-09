@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,7 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup; //creating register form of type FormGroup
 
-  constructor(private router:Router ) {
+  constructor(private router:Router, private authService: AuthService) {
 
   }
 
@@ -34,7 +35,11 @@ export class RegisterComponent implements OnInit {
 
   navigateToLogin(){
     this.router.navigate(['/login']) //arguments are where to navigate to
-
-
   }
+
+  register() {
+    let registerInfo = this.registerForm.value;
+    this.authService.register(registerInfo.email, registerInfo.password, registerInfo.username);
+  }
+
 }
