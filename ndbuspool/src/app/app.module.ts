@@ -8,6 +8,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 
 import { AppRoutingModule } from './app-routing.module';
+import { MaterialComponentsModule } from './shared/material-components.module';
 
 
 @NgModule({
@@ -19,8 +20,9 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
     FormsMaterialComponentsModule,
-    AppRoutingModule
+    MaterialComponentsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
