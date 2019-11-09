@@ -28,7 +28,9 @@
     <br> -->
 
     <button mat-raised-button color="accent" type="submit" class="action-button" [disabled]="registerForm.invalid" style="color: #244359">REGISTER AS A {{ registerForm.value.type | uppercase }}</button>
-    <p class="auth-switch-prompt" routerLink="">Already have an account, login here.</p>
+    <p class="auth-switch-prompt" (click)="navigateToLogin()">Already have an account, login here.</p>
+
+    <!-- Router Link is basically a nice way of saying "when you click on this, route to another component" -->
 
   </form>
 </div>
