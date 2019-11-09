@@ -1,0 +1,18 @@
+.auth-input {
+  background-color: #244359;
+  border-radius: 33.5px;
+  font-size: 14px;
+  width: 320px;
+  height: 38px;
+  margin-bottom: 13px;
+  padding-left: 25px;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.auth-input-field {
+  color: #eee;
+  margin-top: -4px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  caret-color: #eee !important;
+}
