@@ -17,6 +17,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import * as firebase from 'firebase';
+import { HomeComponent } from './home/home.component';
 
 firebase.initializeApp(environment.firebaseConfig);
 
@@ -24,7 +25,8 @@ firebase.initializeApp(environment.firebaseConfig);
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

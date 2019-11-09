@@ -31,6 +31,7 @@ export class AuthService {
         .then(userObj => {
           console.log(userObj)
           sessionStorage.setItem('email', email)
+          this.router.navigate(['/home'])
         }).catch(error => this.handleError(error.code))
     }
 
