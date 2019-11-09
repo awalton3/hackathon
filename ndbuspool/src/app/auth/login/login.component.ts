@@ -24,4 +24,11 @@ export class LoginComponent implements OnInit {
     })
   }
 
+  login() {
+
+   let loginInfo = this.loginForm.value
+   //call the function in the service
+   
+  }
+
 }
