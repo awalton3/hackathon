@@ -27,17 +27,35 @@ export class AvailableGroupsComponent implements OnInit {
     currDate.setHours(0)
     currDate.setMinutes(0)
     currDate.setSeconds(0)
-    this.dbService.createGroup(this.currUserID, currDate, "8:30pm", "ND", "Midway", 4)
+    this.dbService.createGroup(this.currUserID, currDate, "8:30pm", "ND", "MDW", 4)
   }
 
   joinGroup() {
-    this.dbService.joinGroup(this.currUserID, "rXQYacozNeRo51W3b6CU")
+    this.dbService.joinGroup(this.currUserID, "sFc0UPpIzu7w7z614MRf")
       .then(res => console.log(res))
       .catch(error => console.log(error))
   }
 
+  deleteGroup(){
+    this.dbService.deleteGroup("sFc0UPpIzu7w7z614MRf")
+    
+
+  }
+
+  leaveGroup(){
+
+  }
+
   fetchGroups(origin, dest, time) {
     this.dbService.fetchGroups("ND", "Midway", "8:30pm")
+  }
+
+  updateTrip(){
+
+  }
+
+  deleteTrip(){
+
   }
 
 }
