@@ -36,6 +36,10 @@
 	margin: 0 !important;
 }
 
+.declareFont {
+	font-family: 'Montserrat', sans-serif !important;
+}
+
 /* Buttons */
 
 .action-button {
@@ -58,4 +62,10 @@
 	right: 0 !important;
 	padding: 40px !important;
 	color: #ff8b0b !important;
+}
+
+.app-container {
+  margin: 0;
+  border: 0;
+  padding: 0;
 }

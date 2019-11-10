@@ -1,0 +1,24 @@
+.container {
+  background-color: #0C2340;
+  width: 260px;
+  height: 100vh;
+}
+
+.navLinks {
+  font-weight: 600;
+  color: #fff;
+}
+
+.logo-width {
+  width: 200px;
+}
+
+.profile {
+  color: #f09f23;
+  font-weight: 700;
+  font-size: 30px;
+}
+
+.navLinks--active {
+  color: #f09f23;
+}

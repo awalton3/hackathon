@@ -19,6 +19,14 @@ import { environment } from 'src/environments/environment';
 import * as firebase from 'firebase';
 import { HomeComponent } from './home/home.component';
 import { AvailableGroupsComponent } from './available-groups/available-groups.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { HeaderToolbarComponent } from './header-toolbar/header-toolbar.component';
+import { ManageTripDialogueComponent } from './manage-trip-dialogue/manage-trip-dialogue.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
+
 
 firebase.initializeApp(environment.firebaseConfig);
 
@@ -28,7 +36,10 @@ firebase.initializeApp(environment.firebaseConfig);
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    AvailableGroupsComponent
+    AvailableGroupsComponent,
+    SidenavComponent,
+    HeaderToolbarComponent,
+    ManageTripDialogueComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +47,9 @@ firebase.initializeApp(environment.firebaseConfig);
     AppRoutingModule,
     FormsMaterialComponentsModule,
     MaterialComponentsModule,
+    MatListModule,
+    MatToolbarModule,
+    MatDialogModule,
 
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
@@ -43,6 +57,7 @@ firebase.initializeApp(environment.firebaseConfig);
     AngularFireAuthModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ManageTripDialogueComponent]
 })
 export class AppModule { }

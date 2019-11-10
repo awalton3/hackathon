@@ -56,14 +56,15 @@ export class DatabaseService {
 
   fetchGroups(origin: string, dest: string, time) {
 
-    let targetKey = ''
-
-    firebase.firestore().collection('Groups')
-      .where(firebase.firestore.FieldPath.documentId().toString().substring(19), '==', targetKey)
-      .get()
-      .then(res => {
-        console.log(res)
-      })
+    // let targetKey = ''
+    //
+    // firebase.firestore().collection('Groups')
+    //   .where(firebase.firestore.FieldPath.documentId(), '==', targetKey)
+    //   .get()
+    //   .then(res => {
+    //     console.log(res)
+    //   })
+    
   }
 
   joinGroup(userID: string, groupID: string) {
