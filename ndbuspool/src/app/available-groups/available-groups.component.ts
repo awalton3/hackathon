@@ -8,27 +8,27 @@ import { DatabaseService } from '../database.service';
 })
 export class AvailableGroupsComponent implements OnInit {
 
-  currUserID = sessionStorage.getItem('userID')
+  // Initialize Variables
+  currUserID: string;
 
   constructor(private dbService: DatabaseService) { }
 
   ngOnInit() {
-
     //Get User from fb collection
+    this.currUserID = sessionStorage.getItem('userID')
     this.dbService.getUser(this.currUserID).subscribe(user => {
-      console.log(user.data())
+      console.log(user);
     })
+  }
 
-    //Create a Group if needed
-    //this.dbService.createGroup(currUserID, "8:30pm", "ND", "Midway" )
+  createGroup() {
+    this.dbService.createGroup(this.currUserID, "8:30pm", "ND", "Midway", 4)
+  }
 
-
-    //Testing
-
-  //  creatorID, time, origin, dest
-
-
-  //  this.dbService.createGroup(currUser, "8:30pm", )
+  joinGroup() {
+    this.dbService.joinGroup(this.currUserID, "rXQYacozNeRo51W3b6CU")
+      .then(res => console.log(res))
+      .catch(error => console.log(error))
   }
 
 }
