@@ -5,10 +5,7 @@
     </p>
   </div>
   <mat-nav-list class="widthFullPer" fxLayoutAlign="center center" fxLayout="column">
-    <a mat-list-item routerLinkActive="navLinks--active" (click)="routeToOtherLinks(link)" *ngFor="let link of links" class="declareFont navLinks" fxLayoutAlign="center center"> {{ link }} </a>
-    <a mat-list-item routerLinkActive="navLinks--active" (click)="routeToOtherLinks(link)" *ngFor="let link of links" class="declareFont navLinks" fxLayoutAlign="center center"> {{ link }} </a>
-    <a mat-list-item routerLinkActive="navLinks--active" (click)="routeToOtherLinks(link)" *ngFor="let link of links" class="declareFont navLinks" fxLayoutAlign="center center"> {{ link }} </a>
-    <a mat-list-item routerLinkActive="navLinks--active" (click)="routeToOtherLinks(link)" *ngFor="let link of links" class="declareFont navLinks" fxLayoutAlign="center center"> {{ link }} </a>
+    <a mat-list-item routerLinkActive="navLinks--active" routerLink="home" *ngFor="let link of links" class="declareFont navLinks" fxLayoutAlign="center center"> {{ link }} </a>
   </mat-nav-list>
   <img src="assets/ndbuspool-logo-onDark.png" class="logo-width">
 </div>
