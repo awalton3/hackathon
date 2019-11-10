@@ -29,10 +29,14 @@ export class DatabaseService {
     return this.db.collection("Users").doc(userID).get()
   }
 
-  /* GROUP */
+  /* GROUPS */
 
-  createGroup(creatorID: string, time: string, origin: string, dest: string, limit: number){
-    console.log("IN DB: ", creatorID)
+  createGroup(creatorID: string, time: string, origin: string, dest: string, limit: number) {
+
+    // Construct key
+    let groupID = this.db.createId();
+    let documentKey = groupID + origin + dest;
+
     this.db.collection("Groups").add({
       time: time,
       memberList: [ creatorID ],
@@ -49,11 +53,7 @@ export class DatabaseService {
   }
 
   fetchGroups(origin: string, dest: string, time) {
-
-    // firebase.firestore().collection('Groups')
-    //   .where('origin', '==', origin)
-    //   .orderBy('timestamp', 'desc')
-
+    
   }
 
   joinGroup(userID: string, groupID: string) {
