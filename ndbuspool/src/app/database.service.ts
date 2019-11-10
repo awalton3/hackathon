@@ -12,8 +12,7 @@ export class DatabaseService {
   constructor(private db: AngularFirestore) { }
 
 
-  /* USER */
-
+  /* USER--------------------------------------------------------------------------------*/
   createUser(userID: string, name: any) {
     this.db.collection("Users").doc(userID).set({
       name: name,
@@ -33,15 +32,80 @@ export class DatabaseService {
     return this.db.collection("Users").doc(userID).get()
   }
 
-  /* GROUPS */
+  /* TRIP */
+  //function for setting trip, takes in { location: location, time: time }
+  setTrip(userID, req_nd_dep, req_airport_dep) {
+    this.db.collection("Users").doc(userID).update({
+      rep_airport_dep: req_airport_dep,
+      rep_nd_dep: req_nd_dep
+    })
+      .then(response => {
+        console.log("Trip departure times set successfully.")
+      })
+      .catch(error => {
+        console.log("Error setting trip times:", error)
+      })
+  }
 
-  createGroup(creatorID, date, time, origin, dest, limit) {
+
+  //function to update user trip
+  updateTrip(userID, new_nd, new_airport){
+
+    return new Promise(resolve => {
+       this.getUser(userID).subscribe(user => {
+
+         let curr_nd_group= user.data().curr_to_nd_group
+         let curr_airport_group= user.data().curr_to_airport_group
+         let old_nd = user.data().req_nd_dep
+         let old_airport= user.data().req_airport_dep
+
+         //check to see if user needs to be removed from groups
+         if(old_nd != null && new_nd == null){
+           this.leaveGroup(userID,curr_nd_group)
+         }
+         if(old_airport != null && new_airport == null){
+           this.leaveGroup(userID, curr_airport_group)
+
+          //set new trip values
+          this.setTrip(userID, new_nd, new_airport)
+         }
+
+
+       })
+    })
+
+
+  }
+
+  //function to delete trip
+  deleteTrip(userID) {
+    //check group table to delete user from that group
+    //Update Groups collection
+    return new Promise(resolve => {
+      this.getUser(userID).subscribe(userInfo => {
+
+        //delete user from memberList
+        let nd_group_id = userInfo.data().curr_nd_group
+        let airport_group_id = userInfo.data().curr_airport_group
+
+        this.leaveGroup(userID,nd_group_id)
+        this.leaveGroup(userID,airport_group_id)
+
+        })
+        //delete trip info from user component
+        this.setTrip(userID, null, null)
+      })
+
+  }
+
+  /* GROUPS-------------------------------------------------------------------------------- */
+  createGroup(creatorID: string, date, time, origin: string, dest: string, limit: number) {
 
     // Construct key
     let groupID = this.db.createId();
     console.log(groupID.length)
 
-    let documentKey = groupID + origin + dest;
+    let documentKey = groupID //+ origin + dest;
 
     this.db.collection("Groups").doc(documentKey).set({
       date: date,
@@ -57,6 +121,50 @@ export class DatabaseService {
 
   getGroup(groupID) {
     return this.db.collection("Groups").doc(groupID).get()
+  }
+
+//TODO: make this a listener so as to avoid deadlock in terms of deleting groups
+  deleteGroup(groupID){
+    this.db.collection("Groups").doc(groupID).delete()
+    .then(() => console.log("Group successfully deleted."))
+    .catch(error => console.log(error))
+  }
+
+  leaveGroup(userID,groupID){
+
+    //Update Groups collection
+    return new Promise(resolve => {
+      this.getGroup(groupID).subscribe(group => {
+
+        //delete user from memberList
+        let oldMemberList = group.data().memberList
+        for (var i = oldMemberList.length; i--;) {
+          if (oldMemberList[i] === userID) {
+            oldMemberList.splice(i, 1);
+          }
+        }
+        let newMemberList = oldMemberList
+
+        //check to see if empty
+        if(newMemberList.length ==0){
+          //delete group
+          this.deleteGroup(groupID)
+        } else{
+          //update group with new list
+          let task1 = this.db.collection("Groups").doc(groupID).update({ memberList: newMemberList })
+            .then(() => Promise.resolve(group))
+            .catch(error => Promise.reject(error))
+
+          // Update Users database
+          let task2 = this.onJoinGroup_UpdateUserColl(group, groupID, userID)
+            .then(() => Promise.resolve("Successfully added user to User collection"))
+            .catch(error => Promise.reject(error))
+
+          resolve(Promise.all([task1, task2]))
+          }
+        })
+      })
+
   }
 
   fetchGroups(origin: string, dest: string, date) {
@@ -135,21 +243,6 @@ export class DatabaseService {
   //   })
   //
   // }
-
-  /* TRIP */
-
-  //function for setting trip, takes in { location: location, time: time, date: date }
-  setTrip(userID, req_nd_dep, req_airport_dep) {
-    return this.db.collection("Users").doc(userID).update({
-      req_airport_dep: req_airport_dep,
-      req_nd_dep: req_nd_dep
-    })
-  }
-
-  //function to delete trip
-  deleteTrip(userID, group_ID) {
-    //check group table to delte user from that group
-  }
 
 
 }
