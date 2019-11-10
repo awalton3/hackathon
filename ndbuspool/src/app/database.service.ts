@@ -18,9 +18,11 @@ export class DatabaseService {
     this.db.collection("Users").doc(userID).set({
       name: name,
       userId: userID,
-      req_nd_dep: { location: 'ND', date: null, time: null }, //TO AIRPORT
+
+      req_nd_dep: { location: null, date: null, time: null }, //TO AIRPORT
+      req_airport_dep: { location: null, date: null, time: null }, //FROM AIRPORT
+
       curr_to_airport_group: null, //Current To Aiport Group
-      req_airport_dep: { location: null, time: null }, //FROM AIRPORT
       curr_to_nd_group: null, //Current From Airport Group
     })
       .then(() => console.log("User successfully created."))
@@ -28,13 +30,12 @@ export class DatabaseService {
   }
 
   getUser(userID: string) {
-    console.log(userID)
     return this.db.collection("Users").doc(userID).get()
   }
 
   /* GROUPS */
 
-  createGroup(creatorID: string, date, time, origin: string, dest: string, limit: number) {
+  createGroup(creatorID, date, time, origin, dest, limit) {
 
     // Construct key
     let groupID = this.db.createId();
@@ -63,9 +64,7 @@ export class DatabaseService {
     query = query.where("origin", "==", origin)
     query = query.where("dest", "==", dest)
     query = query.where("date", "==", date)
-    query.get()
-      .then(res => console.log(res))
-      .catch(error => console.log(error))
+    return query.get()
   }
 
   joinGroup(userID: string, groupID: string) {
@@ -139,18 +138,12 @@ export class DatabaseService {
 
   /* TRIP */
 
-  //function for setting trip, takes in { location: location, time: time }
+  //function for setting trip, takes in { location: location, time: time, date: date }
   setTrip(userID, req_nd_dep, req_airport_dep) {
-    this.db.collection("Users").doc(userID).update({
-      rep_airport_dep: req_airport_dep,
-      rep_nd_dep: req_nd_dep
+    return this.db.collection("Users").doc(userID).update({
+      req_airport_dep: req_airport_dep,
+      req_nd_dep: req_nd_dep
     })
-      .then(response => {
-        console.log("Trip departure times set successfully.")
-      })
-      .catch(error => {
-        console.log("Error setting trip times:", error)
-      })
   }
 
   //function to delete trip

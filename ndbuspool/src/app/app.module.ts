@@ -28,6 +28,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
+import { AvailableGroupsCardsComponent } from './available-groups/available-groups-cards/available-groups-cards.component';
+import { CreateGroupDialogueComponent } from './available-groups/create-group-dialogue/create-group-dialogue.component';
+
 
 
 firebase.initializeApp(environment.firebaseConfig);
@@ -41,7 +46,9 @@ firebase.initializeApp(environment.firebaseConfig);
     AvailableGroupsComponent,
     SidenavComponent,
     HeaderToolbarComponent,
-    ManageTripDialogueComponent
+    ManageTripDialogueComponent,
+    AvailableGroupsCardsComponent,
+    CreateGroupDialogueComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +61,8 @@ firebase.initializeApp(environment.firebaseConfig);
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
-
+    MatSelectModule,
+    MatCardModule,
 
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
@@ -63,6 +71,6 @@ firebase.initializeApp(environment.firebaseConfig);
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],
-  entryComponents: [ManageTripDialogueComponent]
+  entryComponents: [ManageTripDialogueComponent, CreateGroupDialogueComponent]
 })
 export class AppModule { }

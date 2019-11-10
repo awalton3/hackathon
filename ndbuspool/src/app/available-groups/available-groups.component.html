@@ -1,7 +1,19 @@
-<p>available-groups works!</p>
+<!-- <p>available-groups works!</p>
 
 <button (click)="joinGroup()">JOIN</button>
 
 <button (click)="createGroup()">CREATE</button>
 
-<button (click)="fetchGroups()">FETCH</button>
+<button (click)="fetchGroups()">FETCH</button> -->
+
+<div fxLayout="row" class="app-container">
+  <app-sidenav></app-sidenav>
+  <app-available-groups-cards></app-available-groups-cards>
+
+  <div class="bottom-right-fab" (click)="onCreateGroup()">
+    <button mat-fab color="accent">
+      <i class="material-icons" fxLayoutAlign="center center" style="color: white">add</i>
+    </button>
+  </div>
+
+</div>

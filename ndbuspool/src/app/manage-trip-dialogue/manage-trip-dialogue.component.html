@@ -4,7 +4,7 @@
 
   <div>
 
-    <p>Heading to the airport from ND</p>
+    <p>Departing Notre Dame</p>
 
     <!--Datepicker -->
     <mat-form-field>
@@ -18,12 +18,21 @@
       <input matInput formControlName="toAirportTime" type="time" placeholder="">
     </mat-form-field>
 
+    <!--Location-->
+    <mat-form-field>
+      <mat-select formControlName="toAirportLocation" placeholder="Select Airport">
+        <mat-option value="MDW">MDW Airport</mat-option>
+        <mat-option value="ORD">ORD Airport </mat-option>
+        <mat-option value="ND">Notre Dame</mat-option>
+      </mat-select>
+    </mat-form-field>
+
   </div>
 
   <!-- FROM AIPORT -->
   <div>
 
-    <p>Heading to ND from the airport</p>
+    <p>Departing Airport</p>
 
     <!--Datepicker -->
     <mat-form-field>
@@ -37,6 +46,17 @@
       <input matInput formControlName="fromAirportTime" type="time" placeholder="">
     </mat-form-field>
 
+    <!--Location-->
+    <mat-form-field>
+      <mat-select formControlName="fromAirportLocation" placeholder="Select Airport">
+        <mat-option value="MDW">MDW Airport</mat-option>
+        <mat-option value="ORD">ORD Airport </mat-option>
+        <mat-option value="ND">Notre Dame</mat-option>
+      </mat-select>
+    </mat-form-field>
+
   </div>
+
+  <button (click)="updateTrip()">UPDATE TRIP</button>
 
 </form>

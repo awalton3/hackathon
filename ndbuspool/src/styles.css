@@ -48,12 +48,17 @@
 	font-weight: 600 !important;
 	width: 320px !important;
 	font-size: 16px !important;
-	color: #6b062f !important;
+	color: #0C2340 !important;
 }
 @media only screen and (max-width: 330px) {
 	.action-button {
 		width: 250px !important;
 	}
+}
+
+.action-button2 {
+	background-color: #0C2340 !important;
+	color: #eee !important;
 }
 
 .bottom-right-fab {

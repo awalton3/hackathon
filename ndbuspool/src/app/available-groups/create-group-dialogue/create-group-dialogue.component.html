@@ -1,0 +1,40 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+
+  <p class="title declareFont">Create a Group!</p>
+
+  <form [formGroup]="groupForm" fxLayout="column" fxLayoutAlign="start center">
+
+    <!--Datepicker -->
+    <mat-form-field fxFill>
+      <input matInput formControlName="date" [matDatepicker]="picker" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker color="accent"></mat-datepicker>
+    </mat-form-field>
+
+    <!--Time-->
+    <mat-form-field fxFill>
+      <input matInput formControlName="time" type="time" placeholder="">
+    </mat-form-field>
+
+    <!--Location-->
+    <mat-form-field>
+      <mat-select formControlName="origin" placeholder="Select Origin">
+        <mat-option value="MDW">MDW Airport</mat-option>
+        <mat-option value="ORD">ORD Airport </mat-option>
+        <mat-option value="ND">Notre Dame</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!--Location-->
+    <mat-form-field>
+      <mat-select formControlName="dest" placeholder="Select Destination">
+        <mat-option value="MDW">MDW Airport</mat-option>
+        <mat-option value="ORD">ORD Airport </mat-option>
+        <mat-option value="ND">Notre Dame</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </form>
+  <button mat-raised-button color="base" type="button" class="action-button action-button2" (click)="addGroup()">ADD GROUP</button>
+
+</div>
