@@ -6,7 +6,7 @@ import * as firebase from 'firebase';
 
 export class DatabaseService {
 
-  constructor(private db: AngularFirestore){}
+  constructor(private db: AngularFirestore) { }
 
 
   /* USER */
@@ -15,13 +15,13 @@ export class DatabaseService {
     this.db.collection("Users").doc(userID).set({
       name: name,
       userId: userID,
-      req_nd_dep: { location: 'ND', time: null}, //TO AIRPORT
-      curr_to_airport_group:null, //Current To Aiport Group
+      req_nd_dep: { location: 'ND', time: null }, //TO AIRPORT
+      curr_to_airport_group: null, //Current To Aiport Group
       req_airport_dep: { location: null, time: null }, //FROM AIRPORT
-      curr_to_nd_group:null, //Current From Airport Group
+      curr_to_nd_group: null, //Current From Airport Group
     })
-    .then(() => console.log("User successfully created."))
-    .catch(error => console.log("Error creating user:", error))
+      .then(() => console.log("User successfully created."))
+      .catch(error => console.log("Error creating user:", error))
   }
 
   getUser(userID: string) {
@@ -35,25 +35,35 @@ export class DatabaseService {
 
     // Construct key
     let groupID = this.db.createId();
+    console.log(groupID.length)
+
     let documentKey = groupID + origin + dest;
 
-    this.db.collection("Groups").add({
+    this.db.collection("Groups").doc(documentKey).set({
       time: time,
-      memberList: [ creatorID ],
+      memberList: [creatorID],
       origin: origin,
       dest: dest,
       limit: limit
     })
-    .then(() => console.log("Group successfully created!"))
-    .catch(error => console.log(error))
+      .then(() => console.log("Group successfully created!"))
+      .catch(error => console.log(error))
   }
 
-  getGroup(groupID){
+  getGroup(groupID) {
     return this.db.collection("Groups").doc(groupID).get()
   }
 
   fetchGroups(origin: string, dest: string, time) {
-    
+
+    let targetKey = ''
+
+    firebase.firestore().collection('Groups')
+      .where(firebase.firestore.FieldPath.documentId().toString().substring(19), '==', targetKey)
+      .get()
+      .then(res => {
+        console.log(res)
+      })
   }
 
   joinGroup(userID: string, groupID: string) {
@@ -155,16 +165,16 @@ export class DatabaseService {
       rep_airport_dep: req_airport_dep,
       rep_nd_dep: req_nd_dep
     })
-    .then(response => {
-      console.log("Trip departure times set successfully.")
-    })
-    .catch(error => {
-      console.log("Error setting trip times:", error)
-    })
+      .then(response => {
+        console.log("Trip departure times set successfully.")
+      })
+      .catch(error => {
+        console.log("Error setting trip times:", error)
+      })
   }
 
   //function to delete trip
-  deleteTrip(userID, group_ID){
+  deleteTrip(userID, group_ID) {
     //check group table to delte user from that group
   }
 

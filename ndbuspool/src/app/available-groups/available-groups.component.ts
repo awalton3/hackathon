@@ -31,4 +31,8 @@ export class AvailableGroupsComponent implements OnInit {
       .catch(error => console.log(error))
   }
 
+  fetchGroups(origin, dest, time) {
+    this.dbService.fetchGroups("ND", "Midway", "8:30pm")
+  }
+
 }
