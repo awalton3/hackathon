@@ -76,9 +76,18 @@ export class AvailableGroupsComponent implements OnInit {
   //   console.log(this.dbService.fetchGroups("ND", "Midway", "November 10, 2019 at 12:00:00 AM UTC-5"))
   //   console.log("groups supposedly fetched.")
   // }
+//
+//   fetchGroups(origin, dest, time) {
+//     console.log(this.dbService.fetchGroups("ND", "Midway", "November 10, 2019 at 12:00:00 AM UTC-5"))
+//     console.log("groups supposedly fetched.")
+//   }
+  //
+  // setTrip(){
+  //   this.dbService.setTrip("7j1FVj7UudckLRPZDisMtDnkCGk1", "TESTND", "TESTAIRPORT")
+  // }
 
   updateTrip(){
-      this.dbService.updateTrip("7j1FVj7UudckLRPZDisMtDnkCGk1", null, "TEST")
+      this.dbService.updateTrip("7j1FVj7UudckLRPZDisMtDnkCGk1", "TESTND!", "TESTAIRPORT!")
       console.log("Check if 7j1FVj7UudckLRPZDisMtDnkCGk1 updated.")
   }
 

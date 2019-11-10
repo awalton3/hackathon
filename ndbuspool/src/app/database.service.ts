@@ -34,19 +34,19 @@ export class DatabaseService {
 
   /* TRIP */
   //function for setting trip, takes in { location: location, time: time }
-  setTrip(userID, req_nd_dep, req_airport_dep) {
-    this.db.collection("Users").doc(userID).update({
-      rep_airport_dep: req_airport_dep,
-      rep_nd_dep: req_nd_dep
-    })
-      .then(response => {
-        console.log("Trip departure times set successfully.")
-      })
-      .catch(error => {
-        console.log("Error setting trip times:", error)
-      })
-  }
+  // setTrip(userID, req_nd_dep, req_airport_dep) {
+  //   return this.db.collection("Users").doc(userID).update({
+  //     curr_to_airport_group: req_airport_dep,
+  //     curr_to_nd_group: req_nd_dep
+  //   })
+  // }
 
+  setTrip(userID, req_nd_dep, req_airport_dep) {
+    return this.db.collection("Users").doc(userID).update({
+      req_airport_dep: req_airport_dep,
+      req_nd_dep: req_nd_dep
+    })
+  }
 
   //function to update user trip
   updateTrip(userID, new_nd, new_airport){
@@ -56,19 +56,19 @@ export class DatabaseService {
 
          let curr_nd_group= user.data().curr_to_nd_group
          let curr_airport_group= user.data().curr_to_airport_group
-         let old_nd = user.data().req_nd_dep
-         let old_airport= user.data().req_airport_dep
+         let old_nd = user.data().req_nd_dep['date']
+         let old_airport= user.data().req_airport_dep['date']
 
          //check to see if user needs to be removed from groups
          if(old_nd != null && new_nd == null){
            this.leaveGroup(userID,curr_nd_group)
          }
+
          if(old_airport != null && new_airport == null){
            this.leaveGroup(userID, curr_airport_group)
-
+         }
           //set new trip values
           this.setTrip(userID, new_nd, new_airport)
-         }
 
 
        })
@@ -220,29 +220,4 @@ export class DatabaseService {
 
     return this.db.collection("Users").doc(userID).update(dataToWrite)
   }
-
-
-
-  // onJoinGroup_UpdateGroupColl(groupID: string, userID: string) {
-  //
-  //   //Update Groups collection
-  //   this.getGroup(groupID).subscribe(group => {
-  //
-  //     //Add user to memberList
-  //     let newMemberList = group.data().memberList
-  //     if (!newMemberList.some(existingUid => existingUid == userID)) {
-  //       newMemberList.push(userID)
-  //     } else {
-  //       console.log("Error: You cannot join a group you are already in!")
-  //     }
-  //
-  //     // Update database
-  //     this.db.collection("Groups").doc(groupID).update({ memberList: newMemberList })
-  //       .then(() => Promise.resolve(group))
-  //       .catch(error => Promise.reject(error))
-  //   })
-  //
-  // }
-
-
 }
