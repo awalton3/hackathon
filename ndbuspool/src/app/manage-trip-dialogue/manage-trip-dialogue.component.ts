@@ -40,8 +40,10 @@ export class ManageTripDialogueComponent implements OnInit {
     this.tripForm = new FormGroup({
       'toAirportDate': new FormControl(null),
       'toAirportTime': new FormControl(null),
+      'toAirportLocation': new FormControl(null),
       'fromAirportDate': new FormControl(null),
       'fromAirportTime': new FormControl(null),
+      'fromAirportLocation': new FormControl(null),
     })
   }
 
@@ -49,7 +51,7 @@ export class ManageTripDialogueComponent implements OnInit {
     this.tripForm = new FormGroup({
       'toAirportDate': new FormControl(this.initialTripInfo.fromND.date),
       'toAirportTime': new FormControl(this.initialTripInfo.fromND.time),
-      'toAirportLocation': new FormControl(this.initialTripInfo.fromND.location), 
+      'toAirportLocation': new FormControl(this.initialTripInfo.fromND.location),
       'fromAirportDate': new FormControl(this.initialTripInfo.fromAirport.date),
       'fromAirportTime': new FormControl(this.initialTripInfo.fromAirport.time),
       'fromAirportLocation': new FormControl(this.initialTripInfo.fromAirport.location),

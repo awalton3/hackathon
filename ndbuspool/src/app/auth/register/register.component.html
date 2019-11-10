@@ -1,5 +1,6 @@
 <div fxLayout="column" fxLayoutAlign="center center" class="fade-in background-base dynamic-height">
-  <!-- <img class="logo--width" src="assets/img/mughub_logo_horizontal_onDark.png"> -->
+  <img src="assets/ndbuspool-logo-onDark.png" style="width: 300px">
+
   <form [formGroup]="registerForm" fxLayout="column" fxLayoutAlign="center center">
 
     <mat-form-field floatLabel="never" class="auth-input" fxLayoutAlign="start start">
@@ -28,7 +29,7 @@
     <br> -->
 
     <button mat-raised-button color="accent" class="action-button" [disabled]="registerForm.invalid" style="color: #244359" (click)="register()">REGISTER</button>
-    <p class="auth-switch-prompt" (click)="navigateToLogin()">Already have an account, login here.</p>
+    <p class="auth-switch-prompt declareFont" (click)="navigateToLogin()">Already have an account, login here.</p>
 
     <!-- Router Link is basically a nice way of saying "when you click on this, route to another component" -->
 

@@ -24,7 +24,9 @@ export class DatabaseService {
       curr_to_airport_group: null, //Current To Aiport Group
       curr_to_nd_group: null, //Current From Airport Group
     })
-      .then(() => console.log("User successfully created."))
+      .then(() => {
+        console.log("User successfully created.")
+      })
       .catch(error => console.log("Error creating user:", error))
   }
 

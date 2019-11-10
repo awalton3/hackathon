@@ -1,5 +1,5 @@
 <div fxLayout="column" fxLayoutAlign="center center" class="heightFull background-base">
-
+  <img src="assets/ndbuspool-logo-onDark.png" style="width: 300px">
   <form [formGroup]="loginForm" fxLayout="column" fxLayoutAlign="center center">
     <mat-form-field floatLabel="never" fxLayoutAlign="start start" class="auth-input">
       <input matInput formControlName="email" type="email" placeholder="Email" class="auth-input-field" fxLayoutAlign="center center">
@@ -11,7 +11,7 @@
       <span matSuffix (click)="onResetPassword()" class="auth-input-field-forgot">?</span>
     </mat-form-field>
     <button mat-raised-button color="accent" type="button" class="action-button" (click)="login()">LOGIN</button>
-    <p class="auth-switch-prompt" routerLink="/register">Don't have an account, register here.</p>
+    <p class="auth-switch-prompt declareFont" routerLink="/register">Don't have an account, register here.</p>
   </form>
 
 </div>

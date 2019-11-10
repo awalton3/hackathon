@@ -33,6 +33,11 @@ export class AuthService {
         .then(userObj => {
           console.log(userObj)
           sessionStorage.setItem('userID', userObj.user.uid)
+
+          this.fbService.getUser(userObj.user.uid)
+            .subscribe(user => {
+              sessionStorage.setItem('username', user.data().name) 
+            })
           this.router.navigate(['/home'])
         }).catch(error => this.handleError(error.code))
     }
