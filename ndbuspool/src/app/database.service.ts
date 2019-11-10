@@ -58,7 +58,7 @@ export class DatabaseService {
          let old_nd = user.data().req_nd_dep
          let old_airport= user.data().req_airport_dep
 
-         //check to see if user needs to be removed from groups 
+         //check to see if user needs to be removed from groups
          if(old_nd != null && new_nd == null){
            this.leaveGroup(userID,curr_nd_group)
          }
@@ -77,11 +77,24 @@ export class DatabaseService {
   }
 
   //function to delete trip
-  deleteTrip(userID, groupID) {
+  deleteTrip(userID) {
     //check group table to delete user from that group
-    this.leaveGroup(userID, groupID)
-    //delete trip info from user component
-    this.setTrip(userID, null, null)
+    //Update Groups collection
+    return new Promise(resolve => {
+      this.getUser(userID).subscribe(userInfo => {
+
+        //delete user from memberList
+        let nd_group_id = userInfo.data().curr_nd_group
+        let airport_group_id = userInfo.data().curr_airport_group
+
+        this.leaveGroup(userID,nd_group_id)
+        this.leaveGroup(userID,airport_group_id)
+
+        })
+        //delete trip info from user component
+        this.setTrip(userID, null, null)
+      })
+
   }
 
   /* GROUPS-------------------------------------------------------------------------------- */
@@ -123,13 +136,19 @@ export class DatabaseService {
       this.getGroup(groupID).subscribe(group => {
 
         //delete user from memberList
-        let newMemberList = group.data().memberList.remove(userID)
+        let oldMemberList = group.data().memberList
+        for (var i = oldMemberList.length; i--;) {
+          if (oldMemberList[i] === userID) {
+            oldMemberList.splice(i, 1);
+          }
+        }
+        let newMemberList = oldMemberList
 
         //check to see if empty
         if(newMemberList.length ==0){
           //delete group
           this.deleteGroup(groupID)
-        }else{
+        } else{
           //update group with new list
           let task1 = this.db.collection("Groups").doc(groupID).update({ memberList: newMemberList })
             .then(() => Promise.resolve(group))
@@ -142,7 +161,6 @@ export class DatabaseService {
 
           resolve(Promise.all([task1, task2]))
           }
-
         })
       })
 
@@ -156,6 +174,7 @@ export class DatabaseService {
     query.get()
       .then(res => console.log(res))
       .catch(error => console.log(error))
+    //return(query)
   }
 
   joinGroup(userID: string, groupID: string) {

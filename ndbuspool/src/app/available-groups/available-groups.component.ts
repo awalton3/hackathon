@@ -38,23 +38,32 @@ export class AvailableGroupsComponent implements OnInit {
 
   deleteGroup(){
     this.dbService.deleteGroup("sFc0UPpIzu7w7z614MRf")
-    
+    console.log("Check if sFc0UPpIzu7w7z614MRf deleted.")
 
   }
 
   leaveGroup(){
+    this.dbService.leaveGroup("URu65PRrWsVGEhe61CPDtlY3NlG2","zoCWaKApKcIpBh4gaFNu")
+    console.log("Check if URu65PRrWsVGEhe61CPDtlY3NlG2 left group zoCWaKApKcIpBh4gaFNu.")
 
   }
 
   fetchGroups(origin, dest, time) {
-    this.dbService.fetchGroups("ND", "Midway", "8:30pm")
+    console.log(this.dbService.fetchGroups("ND", "Midway", "November 10, 2019 at 12:00:00 AM UTC-5"))
+    console.log("groups supposedly fetched.")
   }
 
-  updateTrip(){
 
+
+
+  updateTrip(){
+      this.dbService.updateTrip("7j1FVj7UudckLRPZDisMtDnkCGk1", null, "TEST")
+      console.log("Check if 7j1FVj7UudckLRPZDisMtDnkCGk1 updated.")
   }
 
   deleteTrip(){
+    this.dbService.deleteTrip("IprQOsNn3XYIx39lCESBxflIzPM2")
+    console.log("Check if trip IprQOsNn3XYIx39lCESBxflIzPM2 deleted")
 
   }
 
