@@ -53,11 +53,13 @@ export class AvailableGroupsComponent implements OnInit {
     console.log("groups supposedly fetched.")
   }
 
-
+  setTrip(){
+    this.dbService.setTrip("7j1FVj7UudckLRPZDisMtDnkCGk1", "TESTND", "TESTAIRPORT")
+  }
 
 
   updateTrip(){
-      this.dbService.updateTrip("7j1FVj7UudckLRPZDisMtDnkCGk1", null, "TEST")
+      this.dbService.updateTrip("7j1FVj7UudckLRPZDisMtDnkCGk1", "TESTND!", "TESTAIRPORT!")
       console.log("Check if 7j1FVj7UudckLRPZDisMtDnkCGk1 updated.")
   }
 
