@@ -25,7 +25,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { HeaderToolbarComponent } from './header-toolbar/header-toolbar.component';
 import { ManageTripDialogueComponent } from './manage-trip-dialogue/manage-trip-dialogue.component';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { DatePipe } from '@angular/common';
 
 
 firebase.initializeApp(environment.firebaseConfig);
@@ -50,13 +52,16 @@ firebase.initializeApp(environment.firebaseConfig);
     MatListModule,
     MatToolbarModule,
     MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+
 
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireAuthModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
   entryComponents: [ManageTripDialogueComponent]
 })

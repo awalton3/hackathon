@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from '../database.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-available-groups',
@@ -11,7 +12,7 @@ export class AvailableGroupsComponent implements OnInit {
   // Initialize Variables
   currUserID: string;
 
-  constructor(private dbService: DatabaseService) { }
+  constructor(private dbService: DatabaseService, private datePipe: DatePipe) { }
 
   ngOnInit() {
     //Get User from fb collection
@@ -22,7 +23,11 @@ export class AvailableGroupsComponent implements OnInit {
   }
 
   createGroup() {
-    this.dbService.createGroup(this.currUserID, "8:30pm", "ND", "Midway", 4)
+    let currDate = new Date();
+    currDate.setHours(0)
+    currDate.setMinutes(0)
+    currDate.setSeconds(0)
+    this.dbService.createGroup(this.currUserID, currDate, "8:30pm", "ND", "Midway", 4)
   }
 
   joinGroup() {

@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
+import { Query } from '@firebase/firestore-types'
+
+
 
 @Injectable({ providedIn: 'root' })
 
@@ -15,7 +18,7 @@ export class DatabaseService {
     this.db.collection("Users").doc(userID).set({
       name: name,
       userId: userID,
-      req_nd_dep: { location: 'ND', time: null }, //TO AIRPORT
+      req_nd_dep: { location: 'ND', date: null, time: null }, //TO AIRPORT
       curr_to_airport_group: null, //Current To Aiport Group
       req_airport_dep: { location: null, time: null }, //FROM AIRPORT
       curr_to_nd_group: null, //Current From Airport Group
@@ -31,7 +34,7 @@ export class DatabaseService {
 
   /* GROUPS */
 
-  createGroup(creatorID: string, time: string, origin: string, dest: string, limit: number) {
+  createGroup(creatorID: string, date, time, origin: string, dest: string, limit: number) {
 
     // Construct key
     let groupID = this.db.createId();
@@ -40,6 +43,7 @@ export class DatabaseService {
     let documentKey = groupID + origin + dest;
 
     this.db.collection("Groups").doc(documentKey).set({
+      date: date,
       time: time,
       memberList: [creatorID],
       origin: origin,
@@ -54,17 +58,14 @@ export class DatabaseService {
     return this.db.collection("Groups").doc(groupID).get()
   }
 
-  fetchGroups(origin: string, dest: string, time) {
-
-    // let targetKey = ''
-    //
-    // firebase.firestore().collection('Groups')
-    //   .where(firebase.firestore.FieldPath.documentId(), '==', targetKey)
-    //   .get()
-    //   .then(res => {
-    //     console.log(res)
-    //   })
-    
+  fetchGroups(origin: string, dest: string, date) {
+    let query: Query = firebase.firestore().collection("Groups")
+    query = query.where("origin", "==", origin)
+    query = query.where("dest", "==", dest)
+    query = query.where("date", "==", date)
+    query.get()
+      .then(res => console.log(res))
+      .catch(error => console.log(error))
   }
 
   joinGroup(userID: string, groupID: string) {
@@ -135,28 +136,6 @@ export class DatabaseService {
   //   })
   //
   // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   /* TRIP */
 

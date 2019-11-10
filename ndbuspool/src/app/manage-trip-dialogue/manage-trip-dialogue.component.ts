@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HeaderToolbarComponent } from '../header-toolbar/header-toolbar.component';
+import { FormGroup, FormControl } from '@angular/forms';
 
 
 @Component({
@@ -9,6 +10,8 @@ import { HeaderToolbarComponent } from '../header-toolbar/header-toolbar.compone
   styleUrls: ['./manage-trip-dialogue.component.css']
 })
 export class ManageTripDialogueComponent implements OnInit {
+
+  tripForm: FormGroup
 
   constructor(
     public dialogRef: MatDialogRef<HeaderToolbarComponent>,
@@ -19,6 +22,16 @@ export class ManageTripDialogueComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.initForm();
+  }
+
+  initForm() {
+    this.tripForm = new FormGroup({
+      'toAirportDate': new FormControl(null),
+      'toAirportTime': new FormControl(null),
+      'fromAirportDate': new FormControl(null),
+      'fromAirportTime': new FormControl(null),
+    })
   }
 
 }

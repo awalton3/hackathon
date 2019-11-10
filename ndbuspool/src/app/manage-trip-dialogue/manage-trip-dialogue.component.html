@@ -1,0 +1,42 @@
+<form [formGroup]="tripForm">
+
+  <!-- TO AIPORT -->
+
+  <div>
+
+    <p>Heading to the airport from ND</p>
+
+    <!--Datepicker -->
+    <mat-form-field>
+      <input matInput formControlName="toAirportDate" [matDatepicker]="toAirportPicker" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="toAirportPicker"></mat-datepicker-toggle>
+      <mat-datepicker #toAirportPicker color="accent"></mat-datepicker>
+    </mat-form-field>
+
+    <!--Time-->
+    <mat-form-field>
+      <input matInput formControlName="toAirportTime" type="time" placeholder="">
+    </mat-form-field>
+
+  </div>
+
+  <!-- FROM AIPORT -->
+  <div>
+
+    <p>Heading to ND from the airport</p>
+
+    <!--Datepicker -->
+    <mat-form-field>
+      <input matInput formControlName="fromAirportDate" [matDatepicker]="fromAirportPicker" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="fromAirportPicker"></mat-datepicker-toggle>
+      <mat-datepicker #fromAirportPicker></mat-datepicker>
+    </mat-form-field>
+
+    <!--Time-->
+    <mat-form-field>
+      <input matInput formControlName="fromAirportTime" type="time" placeholder="">
+    </mat-form-field>
+
+  </div>
+
+</form>
